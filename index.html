@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Servicio que devuelve JSON - BugsBusters</title>
+
+</head>
+
+<body>
+
+ <h1>Servicio que devuelve JSON - BugsBusters</h1>
+ <h2>A continuación te mostraremos el artista y su evento</h2>
+
+ <p><button onclick="resultado()">Resultado</button></p>
+
+ <script type="module">
+
+  import { exportaAHtml } from "./lib/js/exportaAHtml.js"
+  import { consumeJson } from "./lib/js/consumeJson.js"
+  import { muestraError } from "./lib/js/muestraError.js"
+
+  async function resultado() {
+   try {
+    const respuesta =
+     await consumeJson("srv/devuelve.php")
+    alert(`Artista: ${respuesta.body.artista}
+Instrumento: ${respuesta.body.instrumento}
+Festival: ${respuesta.body.festival}`)
+   } catch (error) {
+    muestraError(error)
+   }
+  }
+  exportaAHtml(resultado)
+
+ </script>
+
+</body>
+
+</html>
